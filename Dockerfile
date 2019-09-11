@@ -1,5 +1,5 @@
 FROM alpine:latest
-LABEL maintainer="Jérémy Derussé <jeremy@derusse.com>"
+LABEL authors="Jérémy Derussé <jeremy@derusse.com>, Ag Despopoulos <agdespopoulos@gmail.com>"
 
 RUN apk --no-cache add \
     dnsmasq \
@@ -13,7 +13,5 @@ COPY docker-files/. /
 
 VOLUME /var/run
 EXPOSE 53/udp
-ENV GATEWAY=172.17.42.1 \
-    RESOLV_PATH=
 
 ENTRYPOINT ["entrypoint"]

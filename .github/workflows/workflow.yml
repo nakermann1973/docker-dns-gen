@@ -18,6 +18,7 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         GITHUB_PASS: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_USER: ${{ github.actor }}
+        REPO: ${{ github.repository }}
       shell: bash
       run: |
         ./make.sh

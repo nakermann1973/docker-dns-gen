@@ -31,7 +31,7 @@ then
     echo "$GITHUB_PASS" | docker login docker.pkg.github.com -u "$GITHUB_USER" --password-stdin
     for V in $CONTAINER_VERSION
     do
-        docker tag "$DOCKER_USER/$NAME:$V" "docker.pkg.github.com/${{ github.repository }}/$NAME:$V"
-        docker push "docker.pkg.github.com/${{ github.repository }}/$NAME:$V"
+        docker tag "$DOCKER_USER/$NAME:$V" "docker.pkg.github.com/${REPO}/$NAME:$V"
+        docker push "docker.pkg.github.com/${REPO}/$NAME:$V"
     done
 fi

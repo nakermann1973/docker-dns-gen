@@ -1,6 +1,6 @@
-# Docker DNS-gen
+# Secure Docker DNS-gen (previously: Docker dns-gen)
 
-**Why I forked this repository: the container should be build regularly and all containers should be created not only exposed one**
+**Why I forked this repository: the container should be build regularly and for all local and running containers should be a DNS entry created. Not only for exposed one**
 
 dns-gen sets up a container running Dnsmasq and [docker-gen].
 docker-gen generates a configuration for Dnsmasq and reloads it when containers are

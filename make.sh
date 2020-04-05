@@ -3,11 +3,6 @@
 set -x
 NAME="secure-dns-gen"
 
-DOCKER_PASS=${DOCKER_PASS:-"${{ secrets.DOCKER_PASS }}"}
-DOCKER_USER=${DOCKER_USER:-"${{ secrets.DOCKER_USER }}"}
-GITHUB_PASS=${GITHUB_PASS:-"${{ secrets.GITHUB_TOKEN }}"}
-GITHUB_USER=${GITHUB_USER:-"${{ github.actor }}"}
-
 # Default value if var does not exist.
 DOCKER_USER=${DOCKER_USER:-"abc"}
 

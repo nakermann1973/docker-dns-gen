@@ -1,7 +1,8 @@
 #!/bin/bash
 
 set -x
-NAME="secure-dns-gen"
+
+NAME=${NAME:-"test"}
 
 # Default value if var does not exist.
 DOCKER_USER=${DOCKER_USER:-"abc"}

@@ -19,6 +19,7 @@ jobs:
         GITHUB_PASS: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_USER: ${{ github.actor }}
         REPO: ${{ github.repository }}
+        NAME: secure-dns-gen
       shell: bash
       run: |
         ./make.sh

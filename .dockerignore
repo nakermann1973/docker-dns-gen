@@ -1,5 +1,5 @@
 LICENSE
 README.md
 .gitignore
-.travis.yml
+.github
 make.sh

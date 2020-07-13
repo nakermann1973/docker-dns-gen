@@ -7,22 +7,23 @@ ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/la
 ARG S6_OVERLAY_FILE=/tmp/s6overlay.tar.gz
 ENV DOCKER_HOST unix:///var/run/docker.sock
 
+RUN \
+  apk --no-cache add \
+    curl \
+    dnsmasq
+
+RUN \
+  curl -L ${S6_OVERLAY_RELEASE} -o ${S6_OVERLAY_FILE} && \
+  tar xzf ${S6_OVERLAY_FILE} -C / && \
+  rm ${S6_OVERLAY_FILE}
+
+RUN \
+  curl -L ${JWILDER_DOCKER_GEN_RELEASE} -o ${JWILDER_DOCKER_GEN_FILE} && \
+  tar xzf ${JWILDER_DOCKER_GEN_FILE} -C /usr/local/bin && \
+  rm ${JWILDER_DOCKER_GEN_FILE}
+
 COPY files/. /
 
-# s6 overlay Download
-ADD ${S6_OVERLAY_RELEASE} ${S6_OVERLAY_FILE}
-# Jwilder download
-ADD ${JWILDER_DOCKER_GEN_RELEASE} ${JWILDER_DOCKER_GEN_FILE}
-# Run commands...
-RUN set -eu \
-    ; apk --no-cache add \
-        dnsmasq \
-        openssl \
-    ; tar xzf ${S6_OVERLAY_FILE} -C / \
-    ; rm ${S6_OVERLAY_FILE} \
-    ; tar xzf ${JWILDER_DOCKER_GEN_FILE} -C /usr/local/bin \
-    ; rm ${JWILDER_DOCKER_GEN_FILE}
-# Default expose
 EXPOSE 53/udp
-# Default entrypoint
+
 ENTRYPOINT ["/init"]

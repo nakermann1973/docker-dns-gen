@@ -19,7 +19,6 @@
 
 {{ $tld := or ($.Env.DOMAIN_TLD) "docker" }}
 {{ range $index, $container := $ }}
-    {{ $hosts := coalesce $container.Name (print "*." $container.Name) }}
     {{ $host_part := split $container.Name "_" }}
     {{ $host_part_len := len $host_part }}
     {{ if eq $host_part_len 3 }}

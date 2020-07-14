@@ -1,2 +1,3 @@
 #!/usr/bin/execlineb -P
+with-contenv
 /usr/local/bin/docker-gen -watch -notify-output -notify "pkill -HUP dnsmasq" /etc/hosts.dnsmasq.tmpl /etc/hosts.dnsmasq

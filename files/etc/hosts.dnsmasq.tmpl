@@ -5,8 +5,14 @@
     {{ range $index, $network := .Container.Networks }}
         {{ if ne $network.IP "" }}
 {{ $network.IP }} {{ $host }}.{{ $network.Name }}.{{ $tld }}
+            {{ if ne $network.GlobalIPv6Address "" }}
+{{ $network.GlobalIPv6Address }} {{ $host }}.{{ $network.Name }}.{{ $tld }}
+            {{ end }}
             {{ if ne (closest $networks_exclude $network.Name) $network.Name }}
 {{ $network.IP }} {{ $host }}.{{ $tld }}
+                {{ if ne $network.GlobalIPv6Address "" }}
+{{ $network.GlobalIPv6Address }} {{ $host }}.{{ $tld }}
+                {{ end }}
             {{ end }}
         {{ end }}
     {{ end }}

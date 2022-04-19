@@ -1,17 +1,21 @@
 {{ define "host" }}
     {{ $host := replace .Host "_" "-" 99  }}
     {{ $tld := .Tld }}
+    {{ $networks_exclude := .NetworksExclude }}
     {{ range $index, $network := .Container.Networks }}
         {{ if ne $network.IP "" }}
 {{ $network.IP }} {{ $host }}.{{ $network.Name }}.{{ $tld }}
+            {{ if ne (closest $networks_exclude $network.Name) $network.Name }}
 {{ $network.IP }} {{ $host }}.{{ $tld }}
+            {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}
 
 {{ $tld := or ($.Env.DOMAIN_TLD) "docker" }}
+{{ $networks_exclude := split (or $.Env.NETWORKS_EXCLUDE "") "," }}
 {{ range $index, $container := $ }}
-    {{ template "host" (dict "Container" $container "Host" (print $container.Name) "Tld" $tld) }}
+    {{ template "host" (dict "Container" $container "Host" (print $container.Name) "Tld" $tld "NetworksExclude" $networks_exclude) }}
     {{ $host_part := split $container.Name "_" }}
     {{ $host_part_len := len $host_part }}
     {{ if eq $host_part_len 3 }}

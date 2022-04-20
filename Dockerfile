@@ -15,13 +15,13 @@ ARG JWILDER_DOCKER_GEN_RELEASE=https://github.com/jwilder/docker-gen/releases/do
 
 FROM base-$TARGETARCH AS build
 
-RUN apk --no-cache add curl
+RUN apk --no-cache add curl binutils
 RUN mkdir -p /build/usr/local/bin
 
 RUN curl -L ${S6_OVERLAY_RELEASE_SCRIPTS} | tar -C /build -Jxp
 RUN curl -L ${S6_OVERLAY_RELEASE_BIN} | tar -C /build -Jxp
 
-RUN curl -L ${JWILDER_DOCKER_GEN_RELEASE} | tar -C /build/usr/local/bin -xz
+RUN curl -L ${JWILDER_DOCKER_GEN_RELEASE} | tar -C /build/usr/local/bin -xz && strip /build/usr/local/bin/docker-gen
 
 FROM base-$TARGETARCH
 

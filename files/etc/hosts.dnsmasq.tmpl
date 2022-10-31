@@ -1,5 +1,5 @@
 {{ define "host" }}
-    {{ $host := replace .Host "_" "-" 99  }}
+    {{ $host := .Host }}
     {{ $tld := .Tld }}
     {{ $networks_exclude := .NetworksExclude }}
     {{ range $index, $network := .Container.Networks }}
